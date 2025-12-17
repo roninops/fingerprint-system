@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Journal – {{ user.name }}</title>
+</head>
+<body>
+
+<h1>Journal for {{ user.name }}</h1>
+
+<form method="post">
+
+    <label>Fødselsdato</label><br>
+    <input type="date" name="birthday"
+           value="{{ journal.birthday if journal else '' }}"><br><br>
+
+    <label>Blodtype</label><br>
+    <input type="text" name="blood_type"
+           value="{{ journal.blood_type if journal else '' }}"><br><br>
+
+    <label>Allergier</label><br>
+    <textarea name="allergies">{{ journal.allergies if journal else '' }}</textarea><br><br>
+
+    <label>Medicin</label><br>
+    <textarea name="medications">{{ journal.medications if journal else '' }}</textarea><br><br>
+
+    <label>Sygdomme</label><br>
+    <textarea name="conditions">{{ journal.conditions if journal else '' }}</textarea><br><br>
+
+    <button type="submit">Gem journal</button>
+
+</form>
+
+<br>
+<a href="/">Tilbage</a>
+
+</body>
+</html>

@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+    <meta charset="utf-8">
+    <title>Mit Dashboard – Sundhedsplatform</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background-color: #f2f2f2;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: #ffffff;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid #ccc;
+        }
+        .logo-text {
+            font-size: 24px;
+            font-weight: bold;
+            color: #1e90ff;
+        }
+        nav ul {
+            list-style-type: none;
+            display: flex;
+            gap: 15px;
+            padding: 0;
+            margin: 0;
+        }
+        nav li a {
+            text-decoration: none;
+            color: #333;
+            font-weight: bold;
+        }
+        main {
+            padding: 40px;
+        }
+        h2 {
+            color: #1e90ff;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+
+        th, td {
+            padding: 14px;
+            border-bottom: 1px solid #ddd;
+            text-align: left;
+        }
+
+        th {
+            background-color: #1e90ff;
+            color: white;
+        }
+
+        img {
+            width: 80px;
+            height: 80px;
+            object-fit: cover;
+            border-radius: 6px;
+            border: 1px solid #ccc;
+        }
+
+    </style>
+</head>
+
+<body>
+
+<header>
+    <div class="logo-text">Sundhedsplatform</div>
+    <nav>
+        <ul>
+            <li><a href="/user">Min profil</a></li>
+            <li><a href="{{ url_for('journal')}}">Min Journal</a></li>
+            <li><a href="/logout">Log ud</a></li>
+        </ul>
+    </nav>
+</header>
+
+<main>
+    <h2>Mine oplysninger</h2>
+
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Brugernavn</th>
+            <th>Fingerprint ID</th>
+            <th>Foto</th>
+        </tr>
+
+        <tr>
+            <td>{{ user.id }}</td>
+            <td>{{ user.username }}</td>
+            <td>{{ user.fingerprint_id }}</td>
+            <td>
+                {% if user.photo_path %}
+                    <img src="{{ url_for('static', filename=user.photo_path) }}">
+                {% else %}
+                    (Intet foto)
+                {% endif %}
+            </td>
+        </tr>
+    </table>
+
+</main>
+
+</body>
+</html>

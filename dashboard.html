@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+    <meta charset="utf-8">
+    <title>Dashboard – Sundhedsplatform</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background-color: #f2f2f2;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: #ffffff;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid #ccc;
+        }
+        .logo-text {
+            font-size: 24px;
+            font-weight: bold;
+            color: #1e90ff;
+        }
+        nav ul {
+            list-style-type: none;
+            display: flex;
+            gap: 15px;
+            padding: 0;
+            margin: 0;
+        }
+        nav li a {
+            text-decoration: none;
+            color: #333;
+            font-weight: bold;
+        }
+        main {
+            padding: 40px;
+        }
+        h2 {
+            color: #1e90ff;
+        }
+
+        /* Info box */
+        .info-box {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            max-width: 400px;
+            margin: 20px 0;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        .info-box p {
+            margin: 8px 0;
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+    <div class="logo-text">Sundhedsplatform</div>
+    <nav>
+        <ul>
+            <li><a href="/">Forside</a></li>
+            <li><a href="/login">Log ud</a></li>
+        </ul>
+    </nav>
+</header>
+
+<main>
+    <h2>Bruger Dashboard</h2>
+
+    <div class="info-box">
+        <p><strong>Navn:</strong> {{ user.name }}</p>
+        <p><strong>Fingerprint ID:</strong> {{ user.fingerprint_id }}</p>
+        <p><strong>Adgangsniveau:</strong> {{ user.access_level }}</p>
+        <p><strong>Oprettet:</strong> {{ user.created_at }}</p>
+    </div>
+
+</main>
+
+</body>
+</html>

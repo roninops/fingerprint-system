@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+    <meta charset="utf-8">
+    <title>Login – Sundhedsplatform</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background-color: #f2f2f2;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+
+        header {
+            background-color: #ffffff;
+            padding: 20px;
+            border-bottom: 1px solid #ccc;
+        }
+
+        main {
+            padding: 60px 20px;
+        }
+
+        .login-box {
+            background: #ffffff;
+            padding: 30px;
+            max-width: 400px;
+            margin: auto;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+
+        h2 {
+            color: #1e90ff;
+        }
+
+        .status {
+            margin-top: 20px;
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        .spinner {
+            margin-top: 15px;
+            font-size: 14px;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Sundhedsplatform</h1>
+</header>
+
+<main>
+    <div class="login-box">
+        <h2>Login med fingeraftryk</h2>
+        <p>Scan dit fingeraftryk på læseren</p>
+
+        <div class="status" id="status">
+            Venter på fingeraftryk…
+        </div>
+
+        <div class="spinner">
+            (ESP32 er klar)
+        </div>
+    </div>
+</main>
+
+<script>
+async function checkAuth() {
+    try {
+        const r = await fetch("/access/auth/status");
+        const data = await r.json();
+
+        if (data.authenticated) {
+            window.location.href = "/dashboard";
+        }
+    } catch (e) {
+        console.error("Auth check failed", e);
+    }
+}
+
+setInterval(checkAuth, 1500);
+</script>
+
+</body>
+</html>
+
+<script>
+setInterval(async () => {
+    const r = await fetch("/access/auth/status");
+    const data = await r.json();
+
+    if (data.authenticated) {
+        window.location.href = "/admin/logs";
+    }
+}, 2000);
+</script>

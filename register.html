@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+    <meta charset="utf-8">
+    <title>Registrering – Sundhedsplatform</title>
+    <style>
+        body{
+            font-family: 'Segoe UI', sans-serif;
+            background-color: #f2f2f2;
+            margin: 0;
+            padding: 0;
+        }
+        header{
+            background-color: #ffffff;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 11px solid #ccc;
+        }
+        .logo-container{
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .logo-text{
+            font-size: 24px;
+            font-weight: bold;
+            color: #1e90ff;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+        }
+        nav ul{
+            list-style-type: none;
+            display: flex;
+            gap: 15px;
+            padding: 0;
+            margin: 0;
+        }
+        nav li a{
+            text-decoration: none;
+            color: #333;
+            font-weight: bold;
+        }
+        nav li a:hover{
+            text-decoration: underline;
+        }
+        main{
+            padding: 40px;
+            text-align: center;
+        }
+
+        /* ---- Register form ---- */
+        .register-box{
+            background: #ffffff;
+            padding: 30px;
+            max-width: 400px;
+            margin: 40px auto;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        .register-box h2{
+            color: #1e90ff;
+            margin-bottom: 20px;
+        }
+        .register-box input[type="text"],
+        .register-box input[type="email"],
+        .register-box input[type="password"]{
+            width: 90%;
+            padding: 12px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+        }
+        .register-box button{
+            width: 95%;
+            padding: 12px;
+            background-color: #1e90ff;
+            border: none;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+        .register-box button:hover{
+            background-color: #187bcd;
+        }
+
+        footer{
+            text-align: center;
+            font-size: 12px;
+            color: #999;
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo-container">
+            <div class="logo-text">Sundhedsplatform</div>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="{{ url_for('home') }}">Forside</a></li>
+                <li><a href="{{ url_for('login') }}">Login</a></li>
+                <li><a href="{{ url_for('register') }}">Registrering</a></li>
+                <li><a href="#">Kontakt</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <div class="register-box">
+            <h2>Opret bruger</h2>
+            <form action="/register" method="POST">
+                <input type="text" name="username" placeholder="Brugernavn" required>
+                <input type="password" name="password" placeholder="Adgangskode" required>
+                <input type="text" name="Fingerprint_id" placeholder="Fingerprint ID" value="{{ latest_fp }}" readonly>
+                <button type="submit">Opret konto</button>
+            </form>
+        </div>
+    </main>
+
+    <footer>
+        © 2025 Sundhedsplatform
+    </footer>
+
+</body>
+</html>

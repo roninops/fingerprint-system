@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+    <meta charset="utf-8">
+    <title>BrugerJournal – Admin</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background-color: #f2f2f2;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: #ffffff;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid #ccc;
+        }
+        .logo-text {
+            font-size: 24px;
+            font-weight: bold;
+            color: #1e90ff;
+        }
+        nav ul {
+            list-style-type: none;
+            display: flex;
+            gap: 15px;
+            padding: 0;
+            margin: 0;
+        }
+        nav li a {
+            text-decoration: none;
+            color: #333;
+            font-weight: bold;
+        }
+
+        main {
+            padding: 40px;
+        }
+        h2 {
+            color: #1e90ff;
+        }
+
+        .card {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            max-width: 700px;
+            margin-top: 20px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        .field-title {
+            font-weight: bold;
+            margin-top: 10px;
+            color: #444;
+        }
+        .field-value {
+            background: #fafafa;
+            padding: 10px;
+            border-radius: 6px;
+            border: 1px solid #ddd;
+            margin-bottom: 15px;
+        }
+
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo-text">Sundhedsplatform - Admin Journal View</div>
+        <nav>
+            <ul>
+                <li><a href="{{ url_for('admin_dashboard') }}">Dashboard</a></li>
+                <li><a href="{{ url_for('admin_journal') }}">Journals</a></li>
+                <li><a href="{{ url_for('logout') }}">Logout</a></li>
+            </ul>
+        </nav>
+    </header>
+<main>
+    <h2>Journal for: {{ user.username }}</h2>
+    <div class="card">
+
+        {% if journal %}
+        {% if journal.photo_path %}
+            <div class="field-title">Foto</div>
+            <img src="{{ url_for('static', filename='photos/' + journal.photo_path) }}" alt="Brugerfoto"
+                    style="width: 180px; border-radius:10px; margin-bottom:20px;">
+        {% else %}
+            <p><i>Intet foto uploadet.</i></p>
+        {% endif %}
+
+        <div class="field-title">Fødselsdato</div>
+        <div class="field-value">{{ journal.birthday }}</div>
+
+        <div class="field-title">Blodtype</div>
+        <div class="field-value">{{ journal.blood_type }}</div>
+
+        <div class="field-title">Allergier</div>
+        <div class="field-value">{{ journal.allergies }}</div>
+
+        <div class="field-title">Medicin</div>
+        <div class="field-value">{{ journal.medications }}</div>
+
+        <div class="field-title">Konditioner</div>
+        <div class="field-value">{{ journal.conditions }}</div>
+        {% else %}
+            <p>Ingen journal fundet for denne bruger.</p>
+        {% endif %}
+
+    </div>
+</main>
+</body>
+</html>
